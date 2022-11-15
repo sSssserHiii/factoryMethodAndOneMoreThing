@@ -1,3 +1,5 @@
+package uni.patterns;
+
 class RuMessage implements IMassage
 {
     @Override

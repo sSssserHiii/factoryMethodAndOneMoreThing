@@ -1,3 +1,4 @@
+package uni.patterns;
 
 class RuWord implements IWord
 {

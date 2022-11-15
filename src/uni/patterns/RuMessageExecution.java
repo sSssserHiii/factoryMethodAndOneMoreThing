@@ -1,3 +1,5 @@
+package uni.patterns;
+
 class RuMessageExecution implements Command
 {
     @Override

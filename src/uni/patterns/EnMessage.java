@@ -1,3 +1,5 @@
+package uni.patterns;
+
 class EnMessage implements IMassage
 {
     @Override

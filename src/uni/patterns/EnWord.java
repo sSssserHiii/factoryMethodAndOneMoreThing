@@ -1,3 +1,5 @@
+package uni.patterns;
+
 class EnWord implements IWord
 {
     @Override

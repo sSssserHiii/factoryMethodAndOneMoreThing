@@ -1,5 +1,9 @@
+package uni.patterns;
+
 import java.lang.String;;
 import java.util.Scanner;
+import java.lang.RuntimeException;
+
 
 interface Command {void execute();}
 
@@ -79,22 +83,22 @@ public class Main
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("EN or RU");
-        String l = scanner.next();
-        AppFactory factory  = getFactoryByCountryCode(l);
-
+        String lang = scanner.next();
+        getFactoryByCountryCode(lang);
     }
-    private static AppFactory getFactoryByCountryCode(String l)
+    public static void getFactoryByCountryCode(String l)
     {
-
+        User user = new User();
         switch (l)
         {
             case "RU":
-                new User().getRuTranslate();
-
+                user.getRuTranslate();
+                break;
             case "EN":
-                new User().getEnTranslate();
+                user.getEnTranslate();
+                break;
             default:
-                throw new RuntimeException("Wrong country code: "+ l);
+                throw new RuntimeException("Wrong country code: " + l);
         }
     }
 }
