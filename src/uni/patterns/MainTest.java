@@ -17,7 +17,7 @@ class MainTest {
                 assertTrue(true);
                 break;
             default:
-                throw new RuntimeException("Wrong country code: " + countryCode);
+                assertTrue(false);
         }
     }
 }
