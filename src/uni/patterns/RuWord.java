@@ -2,6 +2,8 @@ package uni.patterns;
 
 class RuWord implements IWord
 {
+
+
     @Override
     public void start() {System.out.println("Нажмите на иконку ворда чтобы начать");}
 

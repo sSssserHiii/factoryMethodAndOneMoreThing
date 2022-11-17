@@ -1,6 +1,6 @@
 package uni.patterns;
 
-class EnMessage implements IMassage
+class EnMessage implements IMessage
 {
     @Override
     public void start() {System.out.println("press shortcut to continue");}

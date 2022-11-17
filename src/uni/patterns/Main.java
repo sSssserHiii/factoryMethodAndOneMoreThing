@@ -8,6 +8,18 @@ import java.lang.RuntimeException;
 interface Command {void execute();}
 
 
+interface IAbFactoryApp
+{
+    IWord callActionWordApp();
+    IMessage callActionMessenger();
+}
+interface IMessage
+{
+    void start();
+    void sendMessage();
+    void close();
+}
+
 interface IWord
 {
     void start();
@@ -15,60 +27,83 @@ interface IWord
     void save();
     void close();
 }
-interface IMassage
+
+class EnTranslateFactory implements IAbFactoryApp
 {
-    void start();
-    void sendMessage();
-    void close();
+    private IMessage productA;
+    private IWord productB;
+
+    EnTranslateFactory(EnMessage m) {this.productA = m;}
+    EnTranslateFactory( EnWord w) {this.productB = w;}
+    @Override
+    public IMessage callActionMessenger() {return this.productA;}
+
+    @Override
+    public IWord callActionWordApp() {return this.productB;}
 }
-interface  AppFactory
+class RuTranslateFactory implements IAbFactoryApp
 {
-    void getRuTranslate();
-    void getEnTranslate();
+    private IMessage productA;
+    private IWord productB;
+
+    RuTranslateFactory(RuMessage m) {this.productA = m;}
+    RuTranslateFactory( RuWord w) {this.productB = w;}
+    @Override
+    public IMessage callActionMessenger() {return this.productA;}
+
+    @Override
+    public IWord callActionWordApp() {return this.productB;}
 }
 
 
 
 class RuWordExecution implements Command
 {
+
+
     @Override
     public void execute() {
-        new RuWord().start();
-        new RuWord().editText();
-        new RuWord().save();
-        new RuWord().close();
+        RuTranslateFactory ruF = new RuTranslateFactory(new RuWord());
+        ruF.callActionWordApp().start();
+        ruF.callActionWordApp().editText();
+        ruF.callActionWordApp().save();
+        ruF.callActionWordApp().close();
     }
 }
 class EnWordExecution implements Command
 {
+
     @Override
     public void execute() {
-        new EnWord().start();
-        new EnWord().editText();
-        new EnWord().save();
-        new EnWord().close();
+        EnTranslateFactory enF = new EnTranslateFactory(new EnMessage());
+        enF.callActionMessenger().start();
+        enF.callActionMessenger().sendMessage();
+        enF.callActionMessenger().close();
     }
 }
 class EnMessageExecution implements Command
 {
+
     @Override
     public void execute() {
-        new EnMessage().start();
-        new EnMessage().sendMessage();
-        new EnMessage().close();
+        EnTranslateFactory enF = new EnTranslateFactory(new EnWord());
+        enF.callActionWordApp().start();
+        enF.callActionWordApp().editText();
+        enF.callActionWordApp().save();
+        enF.callActionWordApp().close();
     }
 }
 
-class User implements AppFactory
+class User //invoker
 {
-    @Override
+    User(){}
+
     public void getEnTranslate()
     {
-        new EnMessageExecution().execute();
         new EnWordExecution().execute();
+        new EnMessageExecution().execute();
     }
 
-    @Override
     public void getRuTranslate()
     {
         new RuMessageExecution().execute();

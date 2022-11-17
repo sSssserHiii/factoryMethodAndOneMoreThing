@@ -1,6 +1,6 @@
 package uni.patterns;
 
-class RuMessage implements IMassage
+class RuMessage implements IMessage
 {
     @Override
     public void start() {System.out.println("Нажмите на иконку мессенджера чтобы начать");}
