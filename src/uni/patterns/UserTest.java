@@ -9,7 +9,7 @@ class UserTest {
     @Test
     void getEnTranslate()
     {
-        assertAll(this::getEnTranslate);
+        assertAll(this::getRuTranslate);
     }
 
     @Test
